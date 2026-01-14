@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatHistory = document.getElementById('chat-history');
     const typingIndicator = document.getElementById('typing-indicator');
 
-    // Knowledge base for the bot
+
     const knowledgeBase = {
         "hello": "Hello there! How can I help you today?",
         "hi": "Hi! What's on your mind?",
@@ -29,12 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
     function getResponse(userText) {
         const cleanText = normalizeText(userText);
 
-        // Check for direct matches
+
         if (knowledgeBase[cleanText]) {
             return knowledgeBase[cleanText];
         }
 
-        // Check for partial matches
+
         for (const key in knowledgeBase) {
             if (cleanText.includes(key) && key !== "default") {
                 return knowledgeBase[key];
@@ -48,10 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const msgDiv = document.createElement('div');
         msgDiv.classList.add('message');
         msgDiv.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
-        msgDiv.innerText = text; // Secure way to add text
+        msgDiv.innerText = text;
         chatHistory.appendChild(msgDiv);
 
-        // Scroll to bottom
+
         chatHistory.scrollTop = chatHistory.scrollHeight;
     }
 
@@ -59,28 +59,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const text = inputField.value.trim();
         if (text === "") return;
 
-        // Add user message
+
         appendMessage(text, 'user');
         inputField.value = "";
 
-        // Show typing indicator
+
         typingIndicator.style.display = 'block';
         chatHistory.scrollTop = chatHistory.scrollHeight;
 
-        // Simulate network delay for realism
+
         setTimeout(() => {
             const response = getResponse(text);
 
-            // Hide typing indicator
+
             typingIndicator.style.display = 'none';
 
-            // Add bot message
             appendMessage(response, 'bot');
 
-        }, 800 + Math.random() * 800); // Random delay between 800ms and 1600ms
+        }, 800 + Math.random() * 800);
     }
 
-    // Event listeners
+
     sendBtn.addEventListener('click', handleUserMessage);
 
     inputField.addEventListener('keypress', (e) => {
@@ -89,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Initial greeting
+
     setTimeout(() => {
         appendMessage("Hello! I'm ready to chat.", 'bot');
     }, 500);

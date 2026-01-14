@@ -12,7 +12,7 @@ def load_data(filepath):
         return None
     try:
         data = pd.read_csv(filepath)
-        # Ensure columns exist
+
         if 'label' not in data.columns or 'message' not in data.columns:
             print("Error: Dataset must contain 'label' and 'message' columns.")
             return None
@@ -23,29 +23,26 @@ def load_data(filepath):
 
 def train_model(data):
     """Trains a Naive Bayes model for spam detection."""
-    # Convert labels to binary: spam=1, ham=0
+
     data['label_num'] = data['label'].map({'spam': 1, 'ham': 0})
     
     X = data['message']
     y = data['label_num']
 
-    # Vectorize the text data
+
     vectorizer = CountVectorizer()
     X_vectorized = vectorizer.fit_transform(X)
 
-    # Split into training and testing sets
+
     X_train, X_test, y_train, y_test = train_test_split(X_vectorized, y, test_size=0.2, random_state=42)
 
-    # Train the model
+
     clf = MultinomialNB()
     clf.fit(X_train, y_train)
 
-    #Evaluate
+
     y_pred = clf.predict(X_test)
-    # print("\n--- Model Evaluation ---")
-    # print(f"Accuracy: {accuracy_score(y_test, y_pred):.2f}")
-    # print("\nClassification Report:")
-    # print(classification_report(y_test, y_pred, target_names=['Ham', 'Spam']))
+
 
     return clf, vectorizer
 
@@ -59,16 +56,14 @@ def main():
     print("Welcome to the Spam Detection System!")
     filepath = 'data.csv'
     
-    #print("Loading data...")
-    #print(f"Directory: {os.getcwd()}")
+
     data = load_data(filepath)
     
     if data is not None:
-        #print(f"Data loaded successfully. {len(data)} examples found.")
-        #print("Training model...")
+
         model, vectorizer = train_model(data)
         
-        #print("\nModel trained successfully!")
+
         print("Type a message to check if it's spam or not.")
         print("Type 'exit' or 'quit' to stop the program.\n")
         

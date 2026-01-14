@@ -33,7 +33,7 @@ body {
     overflow: hidden; 
 }
 
-/* Background ambient glow */
+
 body::before {
     content: '';
     position: absolute;
@@ -51,7 +51,7 @@ body::before {
 
 .main-container {
     width: 100%;
-    max-width: 500px; /* Mobile friendly max width */
+    max-width: 500px;
     height: 90vh;
     display: flex;
     flex-direction: column;
@@ -120,7 +120,7 @@ header {
     color: rgba(255, 255, 255, 0.6);
 }
 
-/* Chat History Area */
+
 #chat-history {
     flex: 1;
     overflow-y: auto;
@@ -131,7 +131,7 @@ header {
     scroll-behavior: smooth;
 }
 
-/* Scrollbar styling */
+
 #chat-history::-webkit-scrollbar {
     width: 6px;
 }
@@ -176,7 +176,7 @@ header {
 }
 
 .typing-indicator {
-    display: none; /* Hidden by default */
+    display: none;
     align-self: flex-start;
     background: var(--bot-msg-bg);
     padding: 12px 18px;
@@ -204,7 +204,7 @@ header {
     40% { transform: scale(1); }
 }
 
-/* Input Area */
+
 .input-area {
     padding: 20px;
     background: rgba(15, 23, 42, 0.4);
@@ -261,7 +261,7 @@ button:active {
     transform: scale(0.95);
 }
 
-/* Mobile adjustments */
+
 @media (max-width: 480px) {
     .main-container {
         height: 100dvh;
